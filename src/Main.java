@@ -28,15 +28,48 @@ public class Main {
 
         try {
             cart.addItem("Meat", 10L);
-
             cart.addItem("Vodafone Recharge Card 20 EGP", 2L);
         }
         catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
-        List<CheckOutDto> CheckoutDetails = CheckoutService.getCheckoutReciept(cart);
-        Map<String, Double> MoneyDetails = CheckoutService.getCheckoutDetails(CheckoutDetails);
+        try
+        {
+            List<CheckOutDto> CheckoutDetails = CheckoutService.getCheckoutReceipt(cart);
+            Map<String, Double> MoneyDetails = CheckoutService.getCheckoutDetails(CheckoutDetails);
+
+
+            System.out.println("**************************************");
+
+            System.out.println("Checkout Details");
+            for (CheckOutDto checkOutDto : CheckoutDetails) {
+                System.out.println(checkOutDto.getProductName() +
+                        " - " + checkOutDto.getQuantity() + " - " + checkOutDto.getTotalPrice() + "EGP");
+
+            }
+
+            System.out.println("------------------");
+            for(Map.Entry<String, Double> entry : MoneyDetails.entrySet())
+            {
+                System.out.println(entry.getKey() + " : " + entry.getValue());
+
+                if(entry.getKey().equals("Amount"))
+                {
+                    if(!CheckoutService.validatePossiblePurchase(entry.getValue(), balance))
+                    {
+                        System.out.println("You don't have enough balance");
+                        return;
+                    }
+                }
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println("**************************************");
+
         List<ShipmentDto> ShipmentNotice = ShipmentService.getShipmentNotice(cart);
 
         System.out.println("Shipment Notice: ");
@@ -46,29 +79,7 @@ public class Main {
 
         }
 
-        System.out.println("**************************************");
 
-        System.out.println("Checkout Details");
-        for (CheckOutDto checkOutDto : CheckoutDetails) {
-            System.out.println(checkOutDto.getProductName() +
-                    " - " + checkOutDto.getQuantity() + " - " + checkOutDto.getTotalPrice() + "EGP");
-
-        }
-
-        System.out.println("------------------");
-        for(Map.Entry<String, Double> entry : MoneyDetails.entrySet())
-        {
-            System.out.println(entry.getKey() + " : " + entry.getValue());
-
-            if(entry.getKey().equals("Amount"))
-            {
-                if(!CheckoutService.validatePossiblePurchase(entry.getValue(), balance))
-                {
-                    System.out.println("You don't have enough balance");
-                    return;
-                }
-            }
-        }
 
     }
 }

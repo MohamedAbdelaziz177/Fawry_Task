@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class CheckoutService {
 
-    public static List<CheckOutDto> getCheckoutReciept(Cart cart)
+    public static List<CheckOutDto> getCheckoutReceipt(Cart cart) throws IllegalArgumentException
     {
         if(cart.getItems().isEmpty())
             throw new IllegalArgumentException("Cart is empty");
