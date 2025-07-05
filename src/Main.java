@@ -61,6 +61,8 @@ public class Main {
     }
     public static void main(String[] args) {
 
+
+        // It's supposed here to register a new customer .. but for simplicity and testing, we 'll only read the balance
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter Ur balance: ");
         double balance = scanner.nextDouble();
