@@ -40,19 +40,19 @@ public class ProductService {
 
     private void seedShippableProducts()
     {
-        Product product1 = new BasicProduct("Smart TV", 8500.0, 10L);
-        product1 = new ShippableDecorator(product1, 10.0);
+        Product TV = new BasicProduct("Smart TV", 8500.0, 10L);
+        TV = new ShippableDecorator(TV, 10.0);
 
-        Product product2 = new BasicProduct("Laptop", 8500.0, 100L);
-        product2 = new ShippableDecorator(product2, 10.0);
+        Product Laptop = new BasicProduct("Laptop", 8500.0, 100L);
+        Laptop = new ShippableDecorator(Laptop, 10.0);
 
 
-        Product product3 = new BasicProduct("Desk", 250.0, 200L);
-        product3 = new ShippableDecorator(product3, 2.0);
+        Product Desk = new BasicProduct("Desk", 250.0, 200L);
+        Desk = new ShippableDecorator(Desk, 2.0);
 
-        products.add(product1);
-        products.add(product2);
-        products.add(product3);
+        products.add(TV);
+        products.add(Laptop);
+        products.add(Desk);
     }
 
     private void seedExpirableProducts()
