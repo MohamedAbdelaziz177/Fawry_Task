@@ -100,7 +100,7 @@ public class Main {
         System.out.println("Checkout Details");
         for (CheckOutDto checkOutDto : CheckoutDetails) {
             System.out.println(checkOutDto.getProductName() +
-                    " - " + checkOutDto.getQuantity() + " - " + checkOutDto.getTotalPrice() + "$");
+                    " - " + checkOutDto.getQuantity() + " - " + checkOutDto.getTotalPrice() + "EGP");
 
         }
 

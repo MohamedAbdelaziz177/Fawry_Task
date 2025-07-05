@@ -5,7 +5,7 @@ import Contracts.Product;
 public class ShippableDecorator extends BasicDecorator {
 
     private double weight;
-    private double shippingCost;
+
 
     public ShippableDecorator(Product product, double weight)
     {
@@ -21,16 +21,6 @@ public class ShippableDecorator extends BasicDecorator {
     public void setWeight(double weight)
     {
         this.weight = weight;
-    }
-
-    public double getShippingCost()
-    {
-        return shippingCost;
-    }
-
-    public void setShippingCost(double shippingCost)
-    {
-        this.shippingCost = shippingCost;
     }
 
 }
