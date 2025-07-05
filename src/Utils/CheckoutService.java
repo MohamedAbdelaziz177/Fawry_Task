@@ -1,5 +1,7 @@
 package Utils;
 
+import Contracts.Product;
+import Decorators.ExpirableDecorator;
 import Model.Cart;
 import Model.CartItem;
 
@@ -12,14 +14,26 @@ public class CheckoutService {
 
     public static List<CheckOutDto> getCheckoutReciept(Cart cart)
     {
+        if(cart.getItems().isEmpty())
+            throw new IllegalArgumentException("Cart is empty");
+
         List<CheckOutDto> checkOutDtoList = new ArrayList<CheckOutDto>();
 
         List<CartItem> cartItems = cart.getItems();
         double totalPrice = 0;
         for(CartItem cartItem : cartItems)
         {
-            checkOutDtoList.add(new CheckOutDto(cartItem.getItem().getName(), cartItem.getQuantity(),
-                    cartItem.getItem().getPrice() * cartItem.getQuantity()));
+            Product product = cartItem.getItem();
+
+            if(product instanceof ExpirableDecorator
+                    && (((ExpirableDecorator) product).isExpired()))
+            {
+                throw new IllegalArgumentException("A product in Cart is expired");
+            }
+
+            checkOutDtoList.add(new CheckOutDto(product.getName(), cartItem.getQuantity(),
+                    product.getPrice() * cartItem.getQuantity()));
+
         }
 
         return checkOutDtoList;
