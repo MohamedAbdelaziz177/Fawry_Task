@@ -61,7 +61,7 @@ public class ProductService {
         cheese = new ExpirableDecorator(cheese, LocalDate.now().plusDays(10));
 
         Product yogurt = new BasicProduct("Nestle 500g", 30, 25L);
-        yogurt = new ExpirableDecorator(yogurt, LocalDate.now().plusDays(10));
+        yogurt = new ExpirableDecorator(yogurt, LocalDate.now().plusDays(-2));
 
         products.add(cheese);
         products.add(yogurt);

@@ -1,6 +1,5 @@
 import Contracts.Product;
 import Model.Cart;
-import Model.Customer;
 import Utils.*;
 
 import java.util.ArrayList;
@@ -27,11 +26,12 @@ public class Main {
         Cart cart = new Cart();
 
         try {
-            cart.addItem("Meat", 10L);
+            cart.addItem("Nestle 500g", 10L);
             cart.addItem("Vodafone Recharge Card 20 EGP", 2L);
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
+            return;
         }
 
         try
@@ -59,13 +59,13 @@ public class Main {
                     if(!CheckoutService.validatePossiblePurchase(entry.getValue(), balance))
                     {
                         System.out.println("You don't have enough balance");
-                        return;
                     }
                 }
             }
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
+            return;
         }
 
         System.out.println("**************************************");
