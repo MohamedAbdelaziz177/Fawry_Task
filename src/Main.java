@@ -30,7 +30,7 @@ public class Main {
         Cart cart = new Cart();
 
         try {
-            cart.addItem("Meat", 3L);
+            cart.addItem("Meat", 1000L);
             cart.addItem("Vodafone Recharge Card 20 EGP", 2L);
         }
         catch (Exception e) {
