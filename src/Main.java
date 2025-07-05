@@ -22,10 +22,7 @@ public class Main {
         System.out.println("Enter Ur balance: ");
         double balance = scanner.nextDouble();
 
-        ProductService productService = new ProductService();
-
-        List<Product> productsInventory = productService.seedData();
-
+        List<Product> productsInventory = ProductService.seedData();
 
         Cart cart = new Cart();
 

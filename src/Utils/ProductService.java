@@ -13,7 +13,7 @@ public class ProductService {
 
     private static List<Product> products = new ArrayList<>();
 
-    public List<Product> seedData()
+    public static List<Product> seedData()
     {
         seedSimpleProducts();
         seedExpirableProducts();
@@ -30,7 +30,7 @@ public class ProductService {
                         .filter(product -> product.getName().equals(name)).findFirst().orElse(null);
     }
 
-    private  void seedSimpleProducts()
+    private static  void seedSimpleProducts()
     {
         products.add(new BasicProduct("Vodafone Recharge Card 20 EGP", 20.0, 100L));
         products.add(new BasicProduct("Netflix 1-Month Token", 120.0, 300L));
@@ -38,7 +38,7 @@ public class ProductService {
 
     }
 
-    private void seedShippableProducts()
+    private static void seedShippableProducts()
     {
         Product TV = new BasicProduct("Smart TV", 8500.0, 10L);
         TV = new ShippableDecorator(TV, 10.0);
@@ -55,7 +55,7 @@ public class ProductService {
         products.add(Desk);
     }
 
-    private void seedExpirableProducts()
+    private static void seedExpirableProducts()
     {
         Product cheese = new BasicProduct("Cheddar Cheese 100g", 120.0, 25L);
         cheese = new ExpirableDecorator(cheese, LocalDate.now().plusDays(10));
@@ -67,7 +67,7 @@ public class ProductService {
         products.add(yogurt);
     }
 
-    private void seedExpirableAndShippableProducts()
+    private static void seedExpirableAndShippableProducts()
     {
         Product meat = new BasicProduct("Meat", 1200.0, 100L);
         meat = new ExpirableDecorator(meat, LocalDate.now().plusDays(100));
