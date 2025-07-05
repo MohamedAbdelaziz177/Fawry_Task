@@ -8,17 +8,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    public static void main(String[] args) {
 
-        //Scanner scanner = new Scanner(System.in);
-
-
-        ProductService productService = new ProductService();
-
-        List<Product> productsInventory = productService.seedData();
+    public static void Test()
+    {
 
         //System.out.println("Enter your name: ");
         //String name = scanner.nextLine();
@@ -26,20 +22,6 @@ public class Main {
         //Long balance = scanner.nextLong();
 //
         //Customer customer = new Customer(name, balance);
-
-        Cart cart = new Cart();
-
-        try {
-            cart.addItem("Meat", 1000L);
-            cart.addItem("Vodafone Recharge Card 20 EGP", 2L);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-
-
         //for (Product product : productsInventory) {
         //    System.out.println(product.getName());
         //    System.out.println(product.getPrice());
@@ -76,6 +58,30 @@ public class Main {
         //        break;
         //}
 
+    }
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter Ur balance: ");
+        double balance = scanner.nextDouble();
+
+        ProductService productService = new ProductService();
+
+        List<Product> productsInventory = productService.seedData();
+
+
+        Cart cart = new Cart();
+
+        try {
+            cart.addItem("Meat", 10L); // will throw since the quantity
+            // is greater than the available quantity
+
+            cart.addItem("Vodafone Recharge Card 20 EGP", 2L);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
         List<CheckOutDto> CheckoutDetails = CheckoutService.getCheckoutReciept(cart);
         Map<String, Double> MoneyDetails = CheckoutService.getCheckoutDetails(CheckoutDetails);
         List<ShipmentDto> ShipmentNotice = ShipmentService.getShipmentNotice(cart);
@@ -100,6 +106,15 @@ public class Main {
         for(Map.Entry<String, Double> entry : MoneyDetails.entrySet())
         {
             System.out.println(entry.getKey() + " : " + entry.getValue());
+
+            if(entry.getKey().equals("Amount"))
+            {
+                if(!CheckoutService.validatePossiblePurchase(entry.getValue(), balance))
+                {
+                    System.out.println("You don't have enough balance");
+                    return;
+                }
+            }
         }
 
     }

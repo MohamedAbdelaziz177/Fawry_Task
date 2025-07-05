@@ -47,5 +47,10 @@ public class CheckoutService {
         return checkoutDetails;
     }
 
+    public static boolean validatePossiblePurchase(Double amount, double balance)
+    {
+        return amount <= balance;
+    }
+
 
 }
