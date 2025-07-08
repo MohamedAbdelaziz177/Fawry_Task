@@ -1,6 +1,4 @@
-Here's a professional GitHub README.md file you can copy and paste directly for your OOP Book Store application:
 
-```markdown
 # Book Store Application
 
 An Object-Oriented Programming (OOP) console application simulating a book store, developed as part of the Fawry internship requirements.
